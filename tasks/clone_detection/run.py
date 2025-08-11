@@ -44,10 +44,10 @@ def convert_all(items):
 def convert_examples_to_features_op(js, tokenizer: RobertaTokenizer, args):
     # opcode
     code = js["opcode_string"]
-    code_tokens = tokenizer.tokenize(code)[:args.opcode_length - 4]
+    code_tokens = tokenizer.tokenize(code)[:args.code_length - 4]
     code_tokens = [tokenizer.cls_token, "<encoder-only>", tokenizer.sep_token] + code_tokens + [tokenizer.sep_token]
     code_ids = tokenizer.convert_tokens_to_ids(code_tokens)
-    padding_length = args.opcode_length - len(code_tokens)
+    padding_length = args.code_length - len(code_tokens)
     code_ids += [tokenizer.pad_token_id] * padding_length
 
     return InputFeatures(code_ids, js["index"], js["label"])
@@ -324,7 +324,7 @@ def main():
     parser.add_argument("--fp16", action='store_true',
                         help="Whether to use 16-bit floating-point precision for training.")
 
-    parser.add_argument("--opcode_length", default=400, type=int,
+    parser.add_argument("--code_length", default=400, type=int,
                         help="Maximum sequence length for opcode inputs after tokenization.")
 
     parser.add_argument("--cpu_cont", default=8, type=int,
