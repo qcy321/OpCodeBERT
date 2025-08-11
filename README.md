@@ -12,7 +12,7 @@ Here, we provide OpCodeBERT:
 
 ## 2.  Fine-tuning
 
-For downstream tasks reported in the paper, please refer to the [tasks](https://github.com/qcy321/OpCodeBERT) folders.
+For downstream tasks reported in the paper, please refer to the [tasks](https://github.com/qcy321/OpCodeBERT/tree/main/tasks) folders.
 
 
 [//]: # (# Reference)
