@@ -162,23 +162,21 @@ def mult_data_processing(args, df_data: DfData, chunk_size: int = 500) -> None:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--num_processes", type=int, default=16,
-                        help='执行的进程个数')
-    parser.add_argument("--dataset", type=str, default="CodeNet_all",
+                        help='Number of processes executed')
+    parser.add_argument("--dataset", type=str, default="CodeNet",
                         help='Select dataset')
 
     args = parser.parse_args()
 
     args.data_dir = {
         "CodeNet": "./dataset/CodeNet",
-        "CodeNet_all": "./dataset/CodeNet_all"
     }
     files = {
         "CodeNet": ["train.jsonl", "test.jsonl", "valid.jsonl"],
-        "CodeNet_all": ["train.jsonl", "test.jsonl", "valid.jsonl"],
     }
     for file in files[args.dataset]:
         if not os.path.exists(args.data_dir[args.dataset] + "/" + file):
-            raise f"{args.data_dir[args.dataset]}/{file}，不存在"
+            raise f"{args.data_dir[args.dataset]}/{file}，does not exist"
     for file in files[args.dataset]:
         mult_data_processing(args, DfData(
             pd.read_json(args.data_dir[args.dataset] + "/" + file,
